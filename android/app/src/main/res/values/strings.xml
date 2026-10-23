@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Shivshakti ProERP</string>
+    <string name="title_activity_main">Shivshakti ProERP</string>
+    <string name="package_name">com.shivshakti.upvcworkshop</string>
+    <string name="custom_url_scheme">com.shivshakti.upvcworkshop</string>
+</resources>
