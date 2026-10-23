@@ -15,6 +15,8 @@ import { QuickActionGrid } from "./quick-action-grid";
 import { RecentDocuments } from "./recent-documents";
 import { RecentJobs } from "./recent-jobs";
 import { StatusStrip } from "./status-strip";
+import { APP_MADE_BY } from "@/lib/brand";
+
 import { formatTimeAgo, useOnlineStatus } from "./dashboard-utils";
 
 type MobileDashboardProps = {
@@ -95,6 +97,8 @@ export function MobileDashboard({
             />
           </div>
         )}
+
+        <p className="px-4 pt-2 text-center text-xs font-medium text-slate-400">{APP_MADE_BY}</p>
       </div>
     </div>
   );

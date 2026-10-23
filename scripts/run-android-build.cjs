@@ -87,14 +87,38 @@ const gradlew = isWin
   ? path.join(androidDir, "gradlew.bat")
   : path.join(androidDir, "gradlew");
 
+function resolveGradleCommand() {
+  if (isWin) return { cmd: "cmd.exe", args: ["/c", gradlew, "assembleDebug"] };
+
+  const gradleUserHome = env.GRADLE_USER_HOME || path.join(os.homedir(), ".gradle");
+  const wrapperDists = path.join(gradleUserHome, "wrapper", "dists", "gradle-8.11.1-all");
+  if (fs.existsSync(wrapperDists)) {
+    for (const hashDir of fs.readdirSync(wrapperDists)) {
+      const gradleBin = path.join(
+        wrapperDists,
+        hashDir,
+        "gradle-8.11.1",
+        "bin",
+        "gradle",
+      );
+      if (fs.existsSync(gradleBin)) {
+        return { cmd: gradleBin, args: ["assembleDebug"] };
+      }
+    }
+  }
+  return { cmd: gradlew, args: ["assembleDebug"] };
+}
+
+const gradle = resolveGradleCommand();
+
 console.log("Building Android APK...");
 const result = isWin
-  ? spawnSync("cmd.exe", ["/c", gradlew, "assembleDebug"], {
+  ? spawnSync(gradle.cmd, gradle.args, {
       cwd: androidDir,
       env,
       stdio: "inherit",
     })
-  : spawnSync(gradlew, ["assembleDebug"], {
+  : spawnSync(gradle.cmd, gradle.args, {
       cwd: androidDir,
       env,
       stdio: "inherit",

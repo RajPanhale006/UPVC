@@ -17,3 +17,4 @@ export const COMPANY_PDF_FOOTER =
   "Shivshakti Enterprises | Aluminium and Fabrication Work | shivhshaktiservice.com";
 
 export const APP_TITLE = `${PRODUCT_NAME} | UPVC Workshop`;
+export const APP_MADE_BY = "Made by Raj Panhale";
